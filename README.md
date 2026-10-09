@@ -48,14 +48,16 @@ sudo apt-get install jenkins
 ```
 Start Jenkins and enable it to start automatically after reboot:
 
-sudo systemctl enable --now jenkins
+```sudo systemctl enable --now jenkins```
 
 Check the service status:
 
-sudo systemctl status jenkins
+```sudo systemctl status jenkins```
+
 Open this address in your browser, replacing the IP with your EC2 public IP:
 
-http://YOUR_EC2_PUBLIC_IP:8080
+```http://YOUR_EC2_PUBLIC_IP:8080```
+
 **Step 2: Update the Jenkins pipeline**
 
 In Jenkins, open your job → Configure → Pipeline → Script.
