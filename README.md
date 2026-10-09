@@ -59,6 +59,8 @@ Check the service status:
 Open this address in your browser, replacing the IP with your EC2 public IP:
 
 ```http://YOUR_EC2_PUBLIC_IP:8080```
+<img width="1713" height="962" alt="image" src="https://github.com/user-attachments/assets/a97e1c40-4fa5-467a-a005-6e8e6ae54cc7" />
+
 
 **Step 2: Update the Jenkins pipeline**
 
@@ -135,6 +137,9 @@ Click Build Now.
 Open the build number.
 
 Click Console Output.
+<img width="971" height="823" alt="image" src="https://github.com/user-attachments/assets/93fe2c1c-3660-4969-b61c-279e96321ab1" />
+
+<img width="1877" height="837" alt="image" src="https://github.com/user-attachments/assets/4544f63b-9322-47fd-987d-8af38146e3b7" />
 
 3. Implement Matrix-Based Security in Jenkins o Enable Matrix-based security. o Create roles with appropriate permissions (e.g., admin, developer). o Restrict anonymous access.
 Step 1: Log in to Jenkins as Administrator
@@ -215,8 +220,15 @@ Step 8: Verify the security configuration
 Test the configuration using separate browser sessions.
 
 Administrator: Log in as adminuser. Confirm that Manage Jenkins and security settings are accessible.
+<img width="745" height="693" alt="image" src="https://github.com/user-attachments/assets/79c0b2ce-fe12-41b2-8359-58ded5f21108" />
+<img width="1917" height="557" alt="image" src="https://github.com/user-attachments/assets/608d53b9-f262-4927-9fcb-379afc9ff0cb" />
+
 
 Developer: Log in as developer1. Confirm that jobs can be viewed and built, but global security settings cannot be changed.
+<img width="1716" height="910" alt="image" src="https://github.com/user-attachments/assets/806aa26b-c3e6-4fb9-8042-6f2dbc1caa83" />
+<img width="1918" height="774" alt="image" src="https://github.com/user-attachments/assets/e521cfe0-1753-43fb-9a70-fc16c9aa1697" />
+
 
 Anonymous: Open Jenkins in a private/incognito window without logging in. Confirm that Jenkins does not allow access to protected pages.
+<img width="1681" height="968" alt="image" src="https://github.com/user-attachments/assets/2fc7175d-c238-4824-ad2d-a07c466a0c0b" />
 
