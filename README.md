@@ -152,7 +152,8 @@ From the dashboard, click Manage Jenkins.
 
 Example URL:
 
-```http://YOUR_SERVER_IP:8080
+```
+http://YOUR_SERVER_IP:8080
 ```
 Step 2: Enable Matrix-based Security
 
@@ -243,21 +244,25 @@ Set the IP address to your server’s public IPv4 address.
 If devlogin.nextastra.com is a custom domain, ensure a CNAME or A record is configured in your DNS provider pointing devlogin.nextastra.com directly to your DuckDNS domain or your server's public IP.
 
 Verify resolution from your terminal:
-```ping devlogin.nextastra.com
+```
+ping devlogin.nextastra.com
 ```
 Step 2: Open Firewall Ports
 Ensure HTTP (80) and HTTPS (443) traffic is allowed through your server's firewall and cloud security groups:
-```sudo ufw allow 80/tcp
+```
+sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
 sudo ufw reload
 ```
 Step 3: Install NGINX and Certbot
 Update packages and install NGINX along with the Certbot NGINX plugin:
-```sudo apt update
+```
+sudo apt update
 sudo apt install -y nginx certbot python3-certbot-nginx
 ```
 Verify that NGINX is running:
-```sudo systemctl enable --now nginx
+```
+sudo systemctl enable --now nginx
 ```
 Step 4: Configure NGINX as a Reverse Proxy
 Create a dedicated server block configuration for devlogin.nextastra.com:
@@ -316,15 +321,18 @@ Certbot will automatically verify ownership via the HTTP-01 challenge, retrieve 
 
 ***Step 6: Verify SSL Auto-Renewal***
 Let's Encrypt certificates are valid for 90 days. Certbot installs a systemd timer for automatic renewal. Test the renewal process with a dry run:
-```sudo certbot renew --dry-run
+```
+sudo certbot renew --dry-run
 ```
 ***Step 7: Test the Deployment***
 Ensure your Node.js application is running in the background (e.g., using PM2):
-```pm2 start app.js --name "node-app"
+```
+pm2 start app.js --name "node-app"
 ```
 ***Open your browser and navigate to:***
 
-```https://devlogin.nextastra.com
+```
+https://devlogin.nextastra.com
 ```
 Check that the secure lock icon displays and that requests are proxied directly to your Node.js backend.
 
