@@ -229,6 +229,6 @@ Test the configuration using separate browser sessions.
 <img width="1918" height="774" alt="image" src="https://github.com/user-attachments/assets/e521cfe0-1753-43fb-9a70-fc16c9aa1697" />
 
 
-Anonymous: Open Jenkins in a private/incognito window without logging in. Confirm that Jenkins does not allow access to protected pages.
+***Anonymous: Open Jenkins in a private/incognito window without logging in. Confirm that Jenkins does not allow access to protected pages.***
 <img width="1681" height="968" alt="image" src="https://github.com/user-attachments/assets/2fc7175d-c238-4824-ad2d-a07c466a0c0b" />
 
