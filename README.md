@@ -1,3 +1,6 @@
+1. Clone and Validate Application
+Clone the provided Node.js Git repository.
+Validate the application by installing dependencies and confirming it runs properly.
 ## Clone the Repository
 
 ```bash
