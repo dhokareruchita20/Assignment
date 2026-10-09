@@ -232,3 +232,99 @@ Test the configuration using separate browser sessions.
 ***Anonymous: Open Jenkins in a private/incognito window without logging in. Confirm that Jenkins does not allow access to protected pages.***
 <img width="1681" height="968" alt="image" src="https://github.com/user-attachments/assets/2fc7175d-c238-4824-ad2d-a07c466a0c0b" />
 
+4. Deploy Using NGINX with SSL o Use NGINX as a reverse proxy for the Node.js app. o Make the application accessible at: https://devlogin.nextastra.com using DuckDNS and Let's Encrypt SSL.
+Step 1: Map the Domain on DuckDNS
+Go to duckdns.org and log in.
+
+In the subdomain field, add your domain/subdomain (e.g., devlogin or your assigned DuckDNS identifier).
+
+Set the IP address to your server’s public IPv4 address.
+
+If devlogin.nextastra.com is a custom domain, ensure a CNAME or A record is configured in your DNS provider pointing devlogin.nextastra.com directly to your DuckDNS domain or your server's public IP.
+
+Verify resolution from your terminal:
+```ping devlogin.nextastra.com
+```
+Step 2: Open Firewall Ports
+Ensure HTTP (80) and HTTPS (443) traffic is allowed through your server's firewall and cloud security groups:
+```sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw reload
+```
+Step 3: Install NGINX and Certbot
+Update packages and install NGINX along with the Certbot NGINX plugin:
+```sudo apt update
+sudo apt install -y nginx certbot python3-certbot-nginx
+```
+Verify that NGINX is running:
+```sudo systemctl enable --now nginx
+```
+Step 4: Configure NGINX as a Reverse Proxy
+Create a dedicated server block configuration for devlogin.nextastra.com:
+
+Create a new configuration file:
+```
+sudo nano /etc/nginx/sites-available/devlogin.nextastra.com```
+***Paste the following configuration (assuming the Node.js app runs locally on port 3000):***
+
+```Nginx
+
+
+server {
+    listen 80;
+    server_name devlogin.nextastra.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+
+        # Enable WebSockets and maintain headers
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+
+        # Forward real client IP addresses
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+***Enable the site by creating a symlink in sites-enabled:***
+
+```sudo ln -s /etc/nginx/sites-available/devlogin.nextastra.com /etc/nginx/sites-enabled/
+```
+***Test and reload NGINX:***
+```
+sudo nginx -t
+sudo systemctl reload nginx
+```
+***Step 5: Obtain and Install the Let's Encrypt SSL Certificate***
+
+Use Certbot to automatically fetch the SSL/TLS certificate and configure HTTPS redirection in NGINX:
+
+```sudo certbot --nginx -d devlogin.nextastra.com
+```
+***Follow the prompts:***
+
+Provide your email address for renewal notices.
+
+Agree to the terms of service.
+
+Certbot will automatically verify ownership via the HTTP-01 challenge, retrieve the certificates, and update your /etc/nginx/sites-available/devlogin.nextastra.com file with the SSL configuration and automatic HTTP-to-HTTPS redirect.
+
+***Step 6: Verify SSL Auto-Renewal***
+Let's Encrypt certificates are valid for 90 days. Certbot installs a systemd timer for automatic renewal. Test the renewal process with a dry run:
+```sudo certbot renew --dry-run
+```
+***Step 7: Test the Deployment***
+Ensure your Node.js application is running in the background (e.g., using PM2):
+```pm2 start app.js --name "node-app"
+```
+***Open your browser and navigate to:***
+
+```https://devlogin.nextastra.com
+```
+Check that the secure lock icon displays and that requests are proxied directly to your Node.js backend.
+
