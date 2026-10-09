@@ -219,12 +219,12 @@ Step 8: Verify the security configuration
 
 Test the configuration using separate browser sessions.
 
-Administrator: Log in as adminuser. Confirm that Manage Jenkins and security settings are accessible.
+***Administrator: Log in as adminuser. Confirm that Manage Jenkins and security settings are accessible.***
 <img width="745" height="693" alt="image" src="https://github.com/user-attachments/assets/79c0b2ce-fe12-41b2-8359-58ded5f21108" />
 <img width="1917" height="557" alt="image" src="https://github.com/user-attachments/assets/608d53b9-f262-4927-9fcb-379afc9ff0cb" />
 
 
-Developer: Log in as developer1. Confirm that jobs can be viewed and built, but global security settings cannot be changed.
+***Developer: Log in as developer1. Confirm that jobs can be viewed and built, but global security settings cannot be changed.***
 <img width="1716" height="910" alt="image" src="https://github.com/user-attachments/assets/806aa26b-c3e6-4fb9-8042-6f2dbc1caa83" />
 <img width="1918" height="774" alt="image" src="https://github.com/user-attachments/assets/e521cfe0-1753-43fb-9a70-fc16c9aa1697" />
 
