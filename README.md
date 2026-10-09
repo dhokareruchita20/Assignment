@@ -298,7 +298,8 @@ server {
 ```
 ***Enable the site by creating a symlink in sites-enabled:***
 
-```sudo ln -s /etc/nginx/sites-available/devlogin.nextastra.com /etc/nginx/sites-enabled/
+```
+sudo ln -s /etc/nginx/sites-available/devlogin.nextastra.com /etc/nginx/sites-enabled/
 ```
 ***Test and reload NGINX:***
 ```
@@ -309,7 +310,8 @@ sudo systemctl reload nginx
 
 Use Certbot to automatically fetch the SSL/TLS certificate and configure HTTPS redirection in NGINX:
 
-```sudo certbot --nginx -d devlogin.nextastra.com
+```
+sudo certbot --nginx -d devlogin.nextastra.com
 ```
 ***Follow the prompts:***
 
